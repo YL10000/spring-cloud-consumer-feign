@@ -1,0 +1,30 @@
+eureka: 
+ client: 
+  serviceUrl: 
+   defaultZone: http://peer1:8761/eureka/ #注册服务器地址
+server:
+  port: 8765
+  
+spring: 
+ application:
+  name: cloud-consumer-feign
+ zipkin: 
+  base-url: http://localhost:8769
+ sleuth: 
+  sampler: 
+   percentage: 1 #配置zipkin采样率，默认为0.1（看不到所用的请求），但是这样修改后会降低接口调用效率
+ rabbitmq: #配置mq消息队列
+  host: localhost 
+  port: 5672 
+  username: guest 
+  password: guest
+feign: 
+ hystrix: 
+  enabled: true #启用hystrix
+info: #/info请求的显示信息
+ app: 
+  name: ${spring.application.name}
+  version: 1.0.0
+ build: 
+  artifactId: @project.artifactId@
+  version: @project.version@
